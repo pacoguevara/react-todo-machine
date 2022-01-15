@@ -37,6 +37,13 @@ function App() {
 		setTodos(newTodos)
 	}
 
+	const deleteTodo = (text) => {
+		const todoIndex = todos.findIndex(todo => todo.text === text)
+		const newTodos = [...todos]
+		newTodos.splice(todoIndex, 1);
+		setTodos(newTodos)
+	}
+
 	return (
 		<React.Fragment>
 			<TodoCounter
@@ -50,7 +57,12 @@ function App() {
 			<TodoList>
 				{
 					searchedTodos.map(todo => (
-						<TodoItem key={todo.text} {...todo} onComplete={ () => completeTodo(todo.text) }/>
+						<TodoItem
+							key={todo.text}
+							{...todo}
+							onComplete={() => completeTodo(todo.text)}
+							onDelete={() => deleteTodo(todo.text) }
+						/>
 					))
 				}
 			</TodoList>
