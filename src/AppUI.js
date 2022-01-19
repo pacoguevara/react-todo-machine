@@ -11,7 +11,9 @@ function AppUI({totalTodos,
 			          setSearchValue,
 			          searchedTodos,
 			          completeTodo,
-			          deleteTodo}) {
+                deleteTodo,
+                loading,
+                error}) {
   return (
     <React.Fragment>
 			<TodoCounter
@@ -22,7 +24,10 @@ function AppUI({totalTodos,
 				searchValue={searchValue}
 				setSearchValue={setSearchValue}
 			/>
-			<TodoList>
+      <TodoList>
+        { error && <p>Something went wrong</p> }
+        { loading && <p>Loading...</p> }
+        { (!loading && !searchedTodos.length) && <p>Add a TODO.</p> }
 				{
 					searchedTodos.map(todo => (
 						<TodoItem
